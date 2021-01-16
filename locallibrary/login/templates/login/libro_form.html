@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style> 
+    * {
+    box-sizing: border-box;
+    }
+
+    input[type=text], select, textarea {
+    width: 440px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    }
+
+    textarea {
+    height: 120px;
+    }
+
+    label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    }
+
+    select{
+        margin-bottom: 9px;
+    }
+ 
+</style>    
+<main role="main" class="container">
+    <h3 class="lead" style="color: #596272"><strong>Registrar libro</strong></h3><br>
+    <div id="top10">
+        <div class="container col-6">
+            <form action="" method="POST" class="form" enctype="multipart/form-data" >
+                <div class="text-center mb-4">
+                    <br>
+                    <h1>Registrar Libro</h1>
+                </div>
+                {% csrf_token %}
+                <div>
+                    {% for field in form %}
+                        <div class="row mt-2 mb-2">
+                            {{ field.errors }}
+                              <label class="col" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <input type="submit" class="btn btn-lg btn-outline-success btn-block mt-4 mb-5" value="Enviar">
+                </div>
+                <!--div>
+                  <div class="row">
+                    {{ form.titulo.errors }}
+                      <label class="col" for="{{ form.titulo.id_for_label }}">Titulo:</label>
+                    {{ form.titulo }}
+                  </div>
+                  <div class="row mt-4">
+                    {{ form.autor.errors }}
+                      <label class="col" for="{{ form.autor.id_for_label }}">Autor:</label>
+                    {{ form.autor }}
+                  </div>
+                  <div class="row mt-4">
+                    {{ form.resumen.errors }}
+                      <label class="col" for="{{ form.resumen.id_for_label }}">Resumen:</label>
+                    {{ form.resumen }}
+                  </div>
+                  <div class="row mt-4">
+                    {{ form.isbn.errors }}
+                      <label class="col" for="{{ form.isbn.id_for_label }}">ISBN:</label>
+                    {{ form.isbn }}
+                  </div>
+                  <div class="row mt-4">
+                    {{ form.genero.errors }}
+                      <label class="col" for="{{ form.genero.id_for_label }}">Genero:</label>
+                    {{ form.genero }}
+                  </div>
+                  <div class="row mt-4">
+                    {{ form.caratula.errors }}
+                      <label class="col" for="{{ form.caratula.id_for_label }}">Caratula:</label>
+                    {{ form.caratula }}
+                  </div>
+                  <input type="submit" class="btn btn-lg btn-outline-success btn-block mt-4 mb-5" value="Enviar">
+                </div-->
+                <!--div>
+                    {%csrf_token%}
+                    <table class="table" style="font-size: 12px;">
+                        {{form.as_table}}
+                    </table>
+                    <input type="submit" class="btn btn-lg btn-outline-success btn-block mt-4 mb-5" value="Enviar">
+                </div-->
+            </form>
+        </div>
+    </div>
+</main><br>
+{% endblock %}

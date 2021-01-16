@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main role="main" class="container">
+    <h3 class="lead" style="color: #596272"><strong>Datos del autor</strong></h3><br>
+    <div class="row" id="top10" style="box-shadow: none; background-color: #F8F9FA; margin-top: -54px;">
+        <div class="col-6"></div> 
+        {% if user.is_superuser %}
+        <div class="col-3">
+            <a href="{% url 'actualizar_autor' autor.pk %}" class="btn btn-info btn-block" role="button">Actualizar</a>
+        </div>       
+        <div class="col-3">           
+            <a href="{% url 'eliminar_autor' autor.pk %}" class="btn btn-info btn-block" role="button">Eliminar</a>
+        </div>    
+        {% endif %}   
+    </div>
+    <div class="row" id="top10" >
+        <div class="col-0">
+            <!--img class="img-fluid" src="{{ libro.caratula.url }}"-->
+        </div>
+        <div class="col-12 text-center" >
+            <h1>{{ autor.nombre }} {{ autor.apellido }}</h1>
+            <h6>Fecha de nacimiento: {{ autor.fecha_nac }}</h6>
+            <h6>Fecha de defuncion: {{ autor.fecha_fall }}</h6>
+        </div>
+    </div>
+    <br>
+    <h3 class="lead pb-2" style="color: #596272"><strong>Obras publicadas</strong></h3>
+    <div class="row">
+        {% for book in autor.libro_set.all %}
+        <div class="col-md-4 hm-100" style="margin-bottom: 25px;">
+            <div class="card text-center h-100 mt-3">
+                <img class="card-img-top mx-auto pt-4" src="{{ book.caratula.url }}">
+                <div class="card-body pb-0">
+                    <h4 class="card-title">{{ book.titulo }}</h4>
+                    <p class="card-text">{{book.genero.first}}</p> 
+                </div>
+                <div class="card-footer pb-4" style="background: transparent; border-top: 0px;">
+                    <a href="{% url 'book-detail' book.pk %}" class="btn btn-primary col-12">Ver</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main><br>
+{% endblock %}

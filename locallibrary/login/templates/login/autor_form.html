@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style> 
+    * {
+    box-sizing: border-box;
+    }
+
+    input[type=text], select, textarea {
+    width: 400px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    }
+
+    textarea {
+    height: 120px;
+    }
+
+    label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    }
+
+
+ 
+</style>  
+<main role="main" class="container">
+    <h3 class="lead" style="color: #596272"><strong>Registrar autor</strong></h3><br>
+    <div id="top10">
+        <div class="container col-6">
+            <form action="" method="POST" class="form" enctype="multipart/form-data">
+                <div class="text-center mb-4">
+                    <br>
+                    <h1>Registrar Autor</h1>
+                </div>
+                {%csrf_token%}
+                <div>
+                    {% for field in form %}
+                        <div class="row mt-2 mb-2">
+                            {{ field.errors }}
+                              <label class="col" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <input type="submit" class="btn btn-lg btn-outline-success btn-block mt-4 mb-5" value="Enviar">
+                </div>
+                <!--div>
+                    {%csrf_token%}
+                    <table style="font-size: 12px;">
+                        {{form.as_table}}
+                    </table>
+                    <input type="submit" class="btn btn-lg btn-outline-success btn-block mt-4 mb-5" value="Enviar">
+                </div-->
+            </form>
+        </div>
+    </div>
+</main><br>
+{% endblock %}

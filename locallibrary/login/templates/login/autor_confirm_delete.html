@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main role="main" class="container " >
+    <h3 class="lead" style="color: #596272"><strong>Eliminar autor</strong></h3><br>
+    <div id="top10">
+        <div class="text-center mb-4" >
+            <br>
+            <h1>Eliminar Autor</h1>
+            <p></p>
+            <p style="font-size: 18px;">¿Seguro que quieres eliminar a <strong>{{autor}}</strong>?</p>
+        </div>
+        <div class="container col-4">
+            <form action="" method="post">
+                {%csrf_token%}
+                <input type="submit" class="btn btn-lg btn-outline-success btn-block mt-4 mb-5" action="" value="Eliminar">
+            </form>
+        </div>
+    </div>
+</main><br>
+
+{% endblock %}

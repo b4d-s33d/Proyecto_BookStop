@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main role="main" class="container">
+    <div class="row">
+        <div id="carousel1" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel1" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel1" data-slide-to="1"></li>
+                <li data-target="#carousel1" data-slide-to="2"></li>
+            </ol>
+            <!-- diapositivas -->
+                <div class="carousel-inner" style="border-radius: 7px;">
+                    {% load static %}
+                    <div class="carousel-item active">
+                        <img class="img-fluid" src="{% static 'img/dune_banner_ranking.png' %}" alt="">
+                    </div>
+                    <div class="carousel-item ">
+                        <img class="img-fluid" src="{% static 'img/hitchhikers_banner_ranking.png' %}" alt="">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="img-fluid" src="{% static 'img/oldmansea_banner_ranking.png' %}" alt="">
+                    </div>
+            <!-- botones de desplazamiento a izquierda y derecha -->
+            <a class="carousel-control-prev" href="#carousel1" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel1" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div><hr>
+    </div>
+    <div class="row pt-2 w-100" id="top10" style="box-shadow: none; background-color: #F8F9FA;">
+        <div class="col-9">
+            <h3 class="lead" style="color: #596272"><strong>Ranking BookStop</strong></h3>
+        </div>  
+        {% if user.is_superuser %}    
+        <div class="col-3">
+            <a href="{% url 'crear_libro' %}" class="btn btn-info btn-block" role="button">Agregar</a>
+        </div>     
+        {% endif %}     
+    </div>
+    <br>
+    {% for book in books %}
+        <div class="row w-100" id="top10" style="margin-bottom: 20px;">
+            <div class="col-3">
+                <img class="thumbnail" src="{{ book.caratula.url }}">
+            </div>
+            <div class="col-6">
+                <h2>{{ forloop.counter }} - {{ book.titulo }}</h2>
+                <h4>{{ book.autor }}</h4>
+                <h5>{{ book.genero.first }}</h5>
+            </div>
+            <div class="col-3">
+                <a href="{% url 'book-detail' book.pk %}" class="btn btn-primary btn-block" role="button">Ver</a>
+                <input class="btn btn-primary btn-block" type="button" id="boton1" name="ver" value="Reseña"/>
+                <!--<a href="{% url 'actualizar_libro' book.pk %}" class="btn btn-primary btn-block" role="button">Actualizar</a>-->
+                <!--<a href="{% url 'eliminar_libro' book.pk %}" class="btn btn-primary btn-block" role="button">Eliminar</a>-->
+                
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+</main>
+{% endblock %}
